@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Valentine 💖</title>
+    <title>For My Husband 💖</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -22,13 +22,23 @@
         }
         h1 {
             color: #d32f2f;
-            font-size: 2.5rem;
+            font-size: 2rem; 
+            margin-bottom: 20px;
+            padding: 0 20px;
+            line-height: 1.4;
+        }
+        .gif-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 220px; /* Fixed height to prevent layout jumping */
             margin-bottom: 20px;
         }
         .gif-container img {
-            width: 200px;
+            max-width: 100%;
+            max-height: 200px;
             border-radius: 15px;
-            margin-bottom: 20px;
+            object-fit: contain;
         }
         .btn-container {
             display: flex;
@@ -61,15 +71,20 @@
             display: none;
             text-align: center;
         }
+        .success-text {
+            font-size: 1.5rem; 
+            color: #d32f2f;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container" id="question-screen">
         <div class="gif-container">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueG56Znd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v6aOebdGROSREhT03O/giphy.gif" alt="Cute Bear">
+            <img id="main-gif" src="https://media1.tenor.com/m/m123K-jQ2qAAAAAC/cute-bear-love.gif" alt="Cute Bear">
         </div>
-        <h1>Will you be my Valentine? 🌹</h1>
+        <h1>Dear husband, Will you be my valentine for life? 🌹</h1>
         
         <div class="btn-container">
             <button id="yesBtn">Yes</button>
@@ -79,10 +94,10 @@
 
     <div id="success-message">
         <div class="gif-container">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6Znd6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/T86lxK3qP7x8O0NfXq/giphy.gif" alt="Happy Bear">
+            <img src="https://media1.tenor.com/m/tQ18-a6CqEAAAAAC/kiss-bear.gif" alt="Kissing Bears">
         </div>
-        <h1>Knew you would say yes! 🎉</h1>
-        <p style="font-size: 1.5rem; color: #d32f2f;">You just made me the happiest person!</p>
+        <h1>I knew you would say yes! 😘</h1>
+        <p class="success-text">You made me the happiest person, I love you forever dear Hubby! 🎉❤️</p>
     </div>
 
     <script>
@@ -90,8 +105,9 @@
         const noBtn = document.getElementById('noBtn');
         const questionScreen = document.getElementById('question-screen');
         const successMessage = document.getElementById('success-message');
+        const mainGif = document.getElementById('main-gif');
 
-        // Messages to show when they click "No"
+        // Texts for the "No" button
         const noTexts = [
             "Are you sure?",
             "Really sure??",
@@ -102,18 +118,33 @@
             "Ok fine, I will stop asking...",
             "Just kidding, say yes please! ❤️"
         ];
-        
+
+        // GIFs corresponding to the "No" button clicks
+        // 1. Shocked, 2. Sad, 3. Crying, 4. Pleading, etc.
+        const noGifs = [
+            "https://media1.tenor.com/m/qV6tC3N7NnAAAAAC/sad-bear.gif",       // Sad 1
+            "https://media1.tenor.com/m/fH0d3A3qK4AAAAAC/cry-bear.gif",       // Crying
+            "https://media1.tenor.com/m/XjCKk4j7PjAAAAAC/pleading-bear.gif",  // Pleading
+            "https://media1.tenor.com/m/8lE-5e6aJkAAAAAC/bubu-dudu-shock.gif", // Shocked
+            "https://media1.tenor.com/m/b5BlbTqDi4cAAAAAC/bear-sad-cute.gif"  // Very sad
+        ];
+
         let clickCount = 0;
 
         noBtn.addEventListener('click', () => {
             clickCount++;
             
-            // Change the text of the No button
+            // 1. Change Text
             if (clickCount < noTexts.length) {
                 noBtn.innerText = noTexts[clickCount];
             }
 
-            // Make the Yes button grow!
+            // 2. Change GIF (Cycle through them)
+            // This grabs a gif from the list based on how many times you clicked
+            const gifIndex = (clickCount - 1) % noGifs.length;
+            mainGif.src = noGifs[gifIndex];
+
+            // 3. Make Yes Button Grow
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             const currentPadding = parseFloat(window.getComputedStyle(yesBtn).paddingTop);
             
