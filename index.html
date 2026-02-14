@@ -85,7 +85,7 @@
         <div class="gif-container">
             <img id="main-gif" src="main.gif" alt="Cute Bear">
         </div>
-        <h1>Dear husband, Will you be my valentine for life? 🌹</h1>
+        <h1>Dear husband, will you be my valentine for life? 🌹</h1>
         
         <div class="btn-container">
             <button id="yesBtn">Yes</button>
@@ -98,7 +98,7 @@
             <img src="confess.gif" alt="Happy Bear">
         </div>
         <h1>I knew you would say yes! 😘</h1>
-        <p class="success-text">You made me the happiest person, I love you forever dear Hubby! 🎉❤️</p>
+        <p class="success-text">You made me the happiest person!! I love you so much dear Hubby! 🎉❤️</p>
     </div>
 
     <script>
@@ -111,21 +111,22 @@
         const noTexts = [
             "Are you sure?",
             "Really sure??",
-            "Pookie please...",
+            "Hubby please... say yes naah!",
             "Just think about it!",
             "If you say no, I will be very sad...",
             "I will be very very very sad...",
             "Ok fine, I will stop asking...",
-            "Just kidding, say yes please! ❤️"
+            "Just kidding, say yes please! Aaaahaa...❤️"
         ];
 
         // Ensure these file names match exactly what you uploaded!
         const noGifs = [
             "sad1.gif", 
-            "sad2.gif", 
+            "sad1.gif", 
+            "sad2.gif",
+            "sad2.gif", // Repeats if they keep clicking
             "sad3.gif",
-            "sad1.gif", // Repeats if they keep clicking
-            "sad2.gif"
+            "sad3.gif"
         ];
 
         let clickCount = 0;
@@ -147,7 +148,7 @@
             const currentPadding = parseFloat(window.getComputedStyle(yesBtn).paddingTop);
             
             yesBtn.style.fontSize = `${currentSize * 1.5}px`;
-            yesBtn.style.padding = `${currentPadding * 1.5}px ${currentPadding * 3}px`;
+            yesBtn.style.padding = `${currentPadding * 1.5}px ${currentPadding * 2.5}px`;
         });
 
         yesBtn.addEventListener('click', () => {
