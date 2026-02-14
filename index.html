@@ -31,7 +31,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 250px; /* Increased height for better fit */
+            height: 250px; 
             margin-bottom: 20px;
         }
         .gif-container img {
@@ -85,7 +85,7 @@
         <div class="gif-container">
             <img id="main-gif" src="main.gif" alt="Cute Bear">
         </div>
-        <h1>Dear husband, will you be my valentine for life? 🌹</h1>
+        <h1>Dear husband, Will you be my valentine for life? 🌹</h1>
         
         <div class="btn-container">
             <button id="yesBtn">Yes</button>
@@ -95,10 +95,10 @@
 
     <div id="success-message">
         <div class="gif-container">
-            <img src="confess.gif" alt="Happy Bear">
+            <img id="confess-gif" src="confess0.gif" alt="Happy Bear">
         </div>
         <h1>I knew you would say yes! 😘</h1>
-        <p class="success-text">You made me the happiest person!! I love you so much dear Hubby! 🎉❤️</p>
+        <p class="success-text">You made me the happiest person, I love you forever dear Hubby! 🎉❤️</p>
     </div>
 
     <script>
@@ -107,27 +107,27 @@
         const questionScreen = document.getElementById('question-screen');
         const successMessage = document.getElementById('success-message');
         const mainGif = document.getElementById('main-gif');
+        const confessGif = document.getElementById('confess-gif');
 
         const noTexts = [
             "Are you sure?",
             "Really sure??",
-            "Hubby please... say yes naah!",
+            "Pookie please...",
             "Just think about it!",
             "If you say no, I will be very sad...",
             "I will be very very very sad...",
             "Ok fine, I will stop asking...",
-            "Just kidding, say yes please! Aaaahaa...❤️"
+            "Just kidding, say yes please! ❤️"
         ];
 
-        // Ensure these file names match exactly what you uploaded!
         const noGifs = [
-            "sad1.gif", 
-            "sad1.gif", 
-            "sad2.gif",
-            "sad2.gif", // Repeats if they keep clicking
-            "sad3.gif",
-            "sad3.gif"
+            "sad1.gif", "sad2.gif", "sad3.gif",
+            "sad4.gif", "sad5.gif", "sad6.gif", "sad7.gif", "sad7.gif"
         ];
+
+        // List of GIFs to loop on success
+        const confessGifs = ["confess0.gif", "confess.gif"];
+        let confessIndex = 0;
 
         let clickCount = 0;
 
@@ -135,12 +135,17 @@
             clickCount++;
             
             // 1. Change Text
-            if (clickCount < noTexts.length) {
-                noBtn.innerText = noTexts[clickCount];
+            if (clickCount <= noTexts.length) {
+                noBtn.innerText = noTexts[clickCount - 1];
+            } else {
+                noBtn.innerText = noTexts[noTexts.length - 1];
             }
 
-            // 2. Change GIF
-            const gifIndex = (clickCount - 1) % noGifs.length;
+            // 2. Change Sad GIF
+            let gifIndex = clickCount - 1;
+            if (gifIndex >= noGifs.length) {
+                gifIndex = noGifs.length - 1;
+            }
             mainGif.src = noGifs[gifIndex];
 
             // 3. Make Yes Button Grow
@@ -148,12 +153,18 @@
             const currentPadding = parseFloat(window.getComputedStyle(yesBtn).paddingTop);
             
             yesBtn.style.fontSize = `${currentSize * 1.5}px`;
-            yesBtn.style.padding = `${currentPadding * 1.5}px ${currentPadding * 2.5}px`;
+            yesBtn.style.padding = `${currentPadding * 1.5}px ${currentPadding * 3}px`;
         });
 
         yesBtn.addEventListener('click', () => {
             questionScreen.style.display = 'none';
             successMessage.style.display = 'block';
+
+            // Start looping the success GIFs
+            setInterval(() => {
+                confessIndex = (confessIndex + 1) % confessGifs.length;
+                confessGif.src = confessGifs[confessIndex];
+            }, 3000); // Switches every 3 seconds (3000ms)
         });
     </script>
 </body>
