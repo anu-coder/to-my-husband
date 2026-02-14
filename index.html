@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Prevents scrollbars when button gets huge */
+            overflow: hidden; 
         }
         .container {
             text-align: center;
@@ -31,12 +31,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 220px; /* Fixed height to prevent layout jumping */
+            height: 250px; /* Increased height for better fit */
             margin-bottom: 20px;
         }
         .gif-container img {
             max-width: 100%;
-            max-height: 200px;
+            max-height: 250px;
             border-radius: 15px;
             object-fit: contain;
         }
@@ -75,6 +75,7 @@
             font-size: 1.5rem; 
             color: #d32f2f;
             margin-top: 15px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -82,7 +83,7 @@
 
     <div class="container" id="question-screen">
         <div class="gif-container">
-            <img id="main-gif" src="https://media1.tenor.com/m/m123K-jQ2qAAAAAC/cute-bear-love.gif" alt="Cute Bear">
+            <img id="main-gif" src="main.gif" alt="Cute Bear">
         </div>
         <h1>Dear husband, Will you be my valentine for life? 🌹</h1>
         
@@ -94,7 +95,7 @@
 
     <div id="success-message">
         <div class="gif-container">
-            <img src="https://media1.tenor.com/m/tQ18-a6CqEAAAAAC/kiss-bear.gif" alt="Kissing Bears">
+            <img src="confess.gif" alt="Happy Bear">
         </div>
         <h1>I knew you would say yes! 😘</h1>
         <p class="success-text">You made me the happiest person, I love you forever dear Hubby! 🎉❤️</p>
@@ -107,7 +108,6 @@
         const successMessage = document.getElementById('success-message');
         const mainGif = document.getElementById('main-gif');
 
-        // Texts for the "No" button
         const noTexts = [
             "Are you sure?",
             "Really sure??",
@@ -119,14 +119,13 @@
             "Just kidding, say yes please! ❤️"
         ];
 
-        // GIFs corresponding to the "No" button clicks
-        // 1. Shocked, 2. Sad, 3. Crying, 4. Pleading, etc.
+        // Ensure these file names match exactly what you uploaded!
         const noGifs = [
-            "https://media1.tenor.com/m/qV6tC3N7NnAAAAAC/sad-bear.gif",       // Sad 1
-            "https://media1.tenor.com/m/fH0d3A3qK4AAAAAC/cry-bear.gif",       // Crying
-            "https://media1.tenor.com/m/XjCKk4j7PjAAAAAC/pleading-bear.gif",  // Pleading
-            "https://media1.tenor.com/m/8lE-5e6aJkAAAAAC/bubu-dudu-shock.gif", // Shocked
-            "https://media1.tenor.com/m/b5BlbTqDi4cAAAAAC/bear-sad-cute.gif"  // Very sad
+            "sad1.gif", 
+            "sad2.gif", 
+            "sad3.gif",
+            "sad1.gif", // Repeats if they keep clicking
+            "sad2.gif"
         ];
 
         let clickCount = 0;
@@ -139,8 +138,7 @@
                 noBtn.innerText = noTexts[clickCount];
             }
 
-            // 2. Change GIF (Cycle through them)
-            // This grabs a gif from the list based on how many times you clicked
+            // 2. Change GIF
             const gifIndex = (clickCount - 1) % noGifs.length;
             mainGif.src = noGifs[gifIndex];
 
